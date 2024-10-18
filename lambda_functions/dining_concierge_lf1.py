@@ -111,7 +111,7 @@ def handle_dining_suggestions_intent(event):
 def handle_thank_you(intent_request: dict) -> dict:
     session_attributes = intent_request.get('sessionAttributes') if intent_request.get(
         'sessionAttributes') is not None else {}
-    return close(
+    return close_request(
         session_attributes,
         "Fulfilled",
         {
