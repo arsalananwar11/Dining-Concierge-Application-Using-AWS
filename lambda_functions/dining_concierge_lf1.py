@@ -90,7 +90,7 @@ def handle_dining_suggestions_intent(event):
                 validation_result['message'],
             )
 
-        #send_message(city, cuisine, date, time, people, phone_number, email, request_id=event['sessionState']['originatingRequestId'])
+        # send_message(city, cuisine, date, time, people, phone_number, email, request_id=event['sessionState']['originatingRequestId'])
         return delegate(
             session_attributes, 
             event['sessionState']['intent']['slots'],
@@ -103,7 +103,7 @@ def handle_dining_suggestions_intent(event):
             "Fulfilled",
             {
                 'contentType': 'PlainText',
-                'content': "Thanks, you're all set! You should receive my suggestions via SMS in a few minutes!"
+                'content': "Thanks, you're all set! You should receive my suggestions via email in a few minutes!"
             },
             event['sessionState']['intent']['name'],
         )
@@ -177,7 +177,7 @@ def validate_dining(slots: dict) -> dict:
         return build_validation_result(
             False,
             "cuisine",
-            f"We currently do not offer { cuisine['value']['interpretedValue'] } cuisine. Can you try a different one?"
+            f"We currently do not offer { cuisine['value']['interpretedValue'] } cuisine. We recommend 'indian', 'italian', 'chinese', 'mexican', 'japanese' cuisines. Can you try a different one?"
         )
 
     if date:
@@ -249,8 +249,7 @@ def is_valid_city(city):
 
 
 def is_valid_cuisine(cuisine):
-    valid_cuisines = ['indian', 'desi', 'american', 'vegetarian', 'seafood', 'chinese', 'korean',
-                      'mexican', 'mediterranean', 'vegan']
+    valid_cuisines = ['indian', 'italian', 'chinese', 'mexican', 'japanese']
     return cuisine.lower() in valid_cuisines
     
 def is_valid_date(date):
